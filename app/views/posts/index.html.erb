@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="/css/board.css">
+<!--게시글 목록 시작-->
+<div>
+<a href="/posts/new">새글 쓰기</a>
+</div>
+<%if !@posts.nil?%>
+<table class="table table-hover article_list">
+  <thead>
+    <tr>
+      <td class="th">#</td>
+      <td class="th">제목</td>
+      <td class="th">날짜</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%@posts.each do |article|%>
+    <tr class="<%if article.id == params[:id].to_i %>selected<%end%>">
+      <tH scope="row">
+        <%=article.id%>
+      </th>
+      <td>
+        <a href="/posts/show/<%=article.id%>"><%=article.title%></a>
+      </td>
+      <td>
+        <span class='hidden-xs'>
+          <%=article.created_at.strftime("%Y.")%>
+        </span>
+        <%=article.created_at.strftime("%m.%d")%>
+      </td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+<%end%>
